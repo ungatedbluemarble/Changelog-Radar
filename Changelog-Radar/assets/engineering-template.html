@@ -1,1 +1,109 @@
+<!--
+Changelog Radar — engineering publication template.
+Neutral starting point for Mode B output. Adapt the header labels, byline, and
+accent variables to the vendor and to the person's own branding if they have one.
+Sentence case throughout. Inline <code> for endpoint/field/version/token names.
+Severity -> section/callout class mapping is in references/output-formats.md.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer platform digest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #5a5a5a;
+    --rule: #e4e4e4;
+    --accent: #2d5d8a;          /* parameterize per vendor */
+    --danger-bg: #fbeaea; --danger-line: #c0392b;
+    --warning-bg: #fdf4e3; --warning-line: #c8860a;
+    --info-bg: #eef4fa; --info-line: #2d5d8a;
+    --code-bg: #f4f4f4;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font-family: "IBM Plex Sans", system-ui, sans-serif; line-height: 1.6; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px 64px; }
+  .site-header { border-bottom: 1px solid var(--rule); padding: 20px 0; margin-bottom: 32px; }
+  .site-header .name { font-weight: 600; font-size: 15px; }
+  .site-header .kind { color: var(--muted); font-size: 13px; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .04em;
+           text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
+  .badge.cat { background: var(--info-bg); color: var(--info-line); }
+  .badge.danger { background: var(--danger-bg); color: var(--danger-line); }
+  .badge.warning { background: var(--warning-bg); color: var(--warning-line); }
+  .badge.info { background: var(--info-bg); color: var(--info-line); }
+  .post-header { margin-bottom: 28px; }
+  .post-header .meta { color: var(--muted); font-size: 13px; margin: 10px 0 6px; }
+  .post-header h1 { font-size: 26px; line-height: 1.25; margin: 6px 0 10px; font-weight: 600; }
+  .post-header .byline { color: var(--muted); font-size: 13px; }
+  .lead { font-size: 16px; color: var(--ink); border-left: 3px solid var(--accent);
+          padding-left: 16px; margin: 24px 0 32px; }
+  .toc { border: 1px solid var(--rule); border-radius: 6px; padding: 16px 18px; margin-bottom: 36px; }
+  .toc h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em;
+            color: var(--muted); margin: 0 0 10px; }
+  .toc ul { list-style: none; margin: 0; padding: 0; }
+  .toc li { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 14px; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  section.item { padding: 24px 0; border-top: 1px solid var(--rule); }
+  section.item h2 { font-size: 19px; font-weight: 600; margin: 10px 0 12px; }
+  .callout { border-radius: 5px; padding: 12px 14px; margin: 14px 0; font-size: 14px; }
+  .callout.danger { background: var(--danger-bg); border-left: 3px solid var(--danger-line); }
+  .callout.warning { background: var(--warning-bg); border-left: 3px solid var(--warning-line); }
+  .callout.info { background: var(--info-bg); border-left: 3px solid var(--info-line); }
+  code { font-family: "IBM Plex Mono", monospace; background: var(--code-bg);
+         padding: 1px 5px; border-radius: 3px; font-size: 90%; }
+  .refs { font-size: 13px; color: var(--muted); margin-top: 12px; }
+  .refs a { color: var(--accent); }
+  footer { border-top: 1px solid var(--rule); margin-top: 40px; padding-top: 18px;
+           color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
 
+  <div class="site-header">
+    <div class="name">{{PUBLICATION_NAME}}</div>
+    <div class="kind">developer platform digest</div>
+  </div>
+
+  <div class="post-header">
+    <span class="badge cat">{{VENDOR}} Developer</span>
+    <div class="meta">{{DATE}}</div>
+    <h1>{{POST_TITLE}}</h1>
+    <div class="byline">{{BYLINE}}</div>
+  </div>
+
+  <p class="lead">{{LEAD_PARAGRAPH}}</p>
+
+  <nav class="toc">
+    <h2>In this digest</h2>
+    <ul>
+      <!-- repeat per item -->
+      <li><span class="badge {{CALLOUT_CLASS}}">{{SEVERITY}}</span>
+          <a href="#item-{{N}}">{{ITEM_TITLE}}</a></li>
+    </ul>
+  </nav>
+
+  <!-- repeat per item -->
+  <section class="item" id="item-{{N}}">
+    <span class="badge {{CALLOUT_CLASS}}">{{SEVERITY}}</span>
+    <h2>{{ITEM_TITLE}}</h2>
+    <div class="callout {{CALLOUT_CLASS}}">{{CALLOUT_TEXT}}</div>
+    <p>{{PROSE}}</p>
+    <div class="refs">Reference: <a href="{{REF_URL}}">{{REF_LABEL}}</a></div>
+  </section>
+
+  <footer>
+    Sources: {{SOURCES}}. Filtered to the components this reader tracks.
+  </footer>
+
+</div>
+</body>
+</html>

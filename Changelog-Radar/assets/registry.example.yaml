@@ -1,1 +1,73 @@
+# Changelog Radar registry — seed file
+#
+# Ships with two complete, real entries to make the format self-documenting. Both use
+# the search_scrape channel, the hardest case: feedless or JavaScript-rendered vendors
+# reached by search rather than a clean feed. Zoom demonstrates a single-product vendor;
+# Anthropic demonstrates one vendor with three distinct services (Claude API, Claude Code,
+# Claude apps) tracked together. Every other vendor is added through the skill's onboarding
+# interview, which validates a source before writing it here.
+#
+# See references/registry-schema.md for the full field reference.
 
+vendors:
+  - id: zoom
+    name: Zoom
+    channel: search_scrape
+    classification: semantic
+    search_scrape:
+      queries:
+        - "Zoom Workplace app release notes 2026"
+        - "Zoom developer changelog API changes site:developers.zoom.us/changelog"
+        - "Zoom API deprecation 2026 site:developers.zoom.us"
+      fetch_targets:
+        # releasebot aggregates Zoom's official notes and is usually within 24h
+        - "https://releasebot.io/updates/zoom"
+        # individual developer changelog entries render on direct fetch even though the index does not
+        - "https://developers.zoom.us/changelog/{category}/{slug}/"
+        # official KB is JS-rendered and returns blank on fetch; kept for confirmation only
+        - "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article={KB_NUMBER}"
+    product_areas:
+      - Meetings
+      - Phone
+      - Webhooks
+      - AI Companion
+      - Admin
+      - Meeting SDK
+      - Platform / OAuth
+    notes: >
+      Official support KB (KB0061222) and the developer changelog index are
+      JavaScript-rendered and return blank on direct fetch; use releasebot.io or
+      individual entry URLs. Mobile releases lag desktop by several days due to app
+      store review. When the person hands over a specific KB number, fetch that entry
+      directly and filter it rather than running the full search. Flag any Zoom Phone
+      call log API deprecations prominently for anyone integrating Zoom Phone with Twilio.
+
+  - id: anthropic
+    name: Anthropic
+    channel: search_scrape
+    classification: semantic
+    search_scrape:
+      queries:
+        - "Anthropic Claude API release notes site:platform.claude.com"
+        - "Claude Code changelog site:code.claude.com"
+        - "Claude apps release notes site:support.claude.com"
+      fetch_targets:
+        # official, dated changelog pages, all confirmed live and fetchable
+        - "https://platform.claude.com/docs/en/release-notes/overview"
+        - "https://code.claude.com/docs/en/changelog"
+        # claude.ai / Claude apps release notes live in the Help Center
+        - "https://support.claude.com (Release notes for Claude Apps)"
+        # releasebot aggregates all three Anthropic streams with dates; useful confirmation
+        - "https://releasebot.io/updates/anthropic"
+    product_areas:
+      - Claude API / developer platform
+      - Claude Code
+      - Claude apps (claude.ai)
+    lookback_window: 30d
+    notes: >
+      No confirmed first-party RSS feed surfaced at onboarding, so this is recorded as
+      search_scrape against the official dated changelog pages, with releasebot.io as a
+      cross-vendor aggregator that also offers Anthropic RSS. If the person later supplies
+      a validated releasebot or first-party feed URL, upgrade this entry to channel: rss.
+      Keep the three sources distinct as separate services so the digest table can show
+      Claude API, Claude Code, and Claude apps on their own rows.
