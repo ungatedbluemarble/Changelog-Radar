@@ -1,0 +1,27 @@
+# Changelog Radar profile — illustrative example
+#
+# This file shows what a personal interest profile looks like once the skill has
+# interviewed you. You do not have to keep a profile file: the skill normally draws
+# your interests out of you in conversation each time, because you are the source of
+# truth on what you use. This is here only to make the format concrete.
+#
+# See changelog-radar/references/registry-schema.md for the full field reference.
+
+interests:
+  twilio:
+    areas:
+      - SMS
+      - Video
+    components:
+      - Messaging Services and sender pools
+      - A2P 10DLC registration
+      - delivery webhooks and error codes
+      - global messaging compliance
+    exclude:
+      services: []                # no whole services muted in this example
+      components:
+        - service: Video
+          match: JavaScript SDK version release notes
+          reason: bound to a specific SDK version, do not need new SDK release notes
+    notes:
+      - "owns Twilio across multiple subaccounts; geo permissions and country routing matter"
