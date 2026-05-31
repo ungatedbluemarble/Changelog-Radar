@@ -54,7 +54,7 @@ If you prefer to inspect before installing, the unpacked skill is in the [`Chang
 
 The skill keeps two kinds of state, both as plain files you control. Neither is a live database the skill reaches into while running; they exist for portability and inspection.
 
-- **The registry** (`changelog-radar/assets/registry.example.yaml` is the seed) records, per vendor, where its updates come from and what its product areas are. It is shared and reusable. It ships with one real worked entry, Zoom, which demonstrates the hardest case: a vendor with no usable feed, reached by search and scrape instead.
+- **The registry** (`Changelog-Radar/assets/registry.example.yaml` is the seed) records, per vendor, where its updates come from and what its product areas are. It is shared and reusable. It ships with one real worked entry, Zoom, which demonstrates the hardest case: a vendor with no usable feed, reached by search and scrape instead.
 - **Your profile** records which services you track and anything you have chosen to mute. It is normally drawn out of you in conversation each time, because you are the source of truth about your own needs. You can keep it as a file for convenience, but the skill never depends on a stored copy.
 
 When the skill adds a vendor or records a mute, it hands you the updated file. Committing it back is your one manual step. This is deliberate: the skill cannot and does not push to your repository, which keeps your registry version-controlled and inspectable rather than silently mutated.
