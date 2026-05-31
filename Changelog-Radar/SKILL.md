@@ -27,6 +27,10 @@ Three entry points. Read the cue and branch.
 
 If no registry exists yet, say so plainly and offer to onboard the first vendor. Do not invent a registry.
 
+## The bundled registry is an example, not a monitoring list
+
+The file at `assets/registry.example.yaml` ships with worked entries (Zoom, Anthropic) purely to document the format and demonstrate the feedless search/scrape case. These are examples, not an active monitoring list. A fresh install monitors nothing until the person onboards their own vendors. Never run a scheduled or on-demand digest against the example entries just because they are present in the bundle: a person who installed this skill did not ask to track Zoom or Anthropic, and surfacing updates for products they may not use is exactly the noise this skill exists to prevent. Treat the person's own onboarded vendors as the only active registry. If the person has onboarded nothing yet and a digest is requested, report that there are no monitored vendors and offer to onboard one, rather than falling back to the examples.
+
 ## Refining the profile
 
 The profile is the local filter, and the person sharpens it conversationally over time. When they react to a digest by saying an item or service is not useful to them, that is a standing instruction to stop surfacing it. Record it as an explicit exclusion in the profile per `references/registry-schema.md`, at whichever level they meant:

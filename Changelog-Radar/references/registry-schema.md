@@ -2,7 +2,7 @@
 
 Two files. Both live in the person's repo for distribution and inspection. The skill reads them and writes updated versions for the person to commit; the skill does not push.
 
-- `registry.yaml` — shared, reusable across people. How to reach each vendor's updates and what its product areas are.
+- `registry.yaml` — the person's own working registry: the vendors they have onboarded and actively monitor. This starts empty on a fresh install and is built up through onboarding. It is distinct from the bundled `assets/registry.example.yaml`, which is an inert example for documenting the format only. Never write the person's real onboarded vendors into the example file, and never treat the example file as the active monitoring list. The example demonstrates structure; the working registry is what the person builds.
 - `profile.yaml` — per person. Which vendors they track and which areas/components matter. Optional: normally elicited fresh in conversation. Saved only as a convenience.
 
 YAML is shown here for readability. JSON with the same structure is equally valid; match whatever the person's repo already uses.

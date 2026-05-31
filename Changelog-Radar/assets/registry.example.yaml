@@ -1,11 +1,15 @@
-# Changelog Radar registry — seed file
+# Changelog Radar registry — EXAMPLE FILE, NOT AN ACTIVE MONITORING LIST
 #
-# Ships with two complete, real entries to make the format self-documenting. Both use
-# the search_scrape channel, the hardest case: feedless or JavaScript-rendered vendors
-# reached by search rather than a clean feed. Zoom demonstrates a single-product vendor;
-# Anthropic demonstrates one vendor with three distinct services (Claude API, Claude Code,
-# Claude apps) tracked together. Every other vendor is added through the skill's onboarding
-# interview, which validates a source before writing it here.
+# These entries exist only to document the format and to demonstrate the hardest
+# channel (feedless / JavaScript-rendered vendors reached by search rather than a feed).
+# The skill does NOT monitor these vendors on a fresh install. Nothing here is tracked
+# until you onboard your own vendors through the skill's interview. If you install this
+# skill and run a digest without onboarding anything, you should get "no monitored
+# vendors yet," not a Zoom or Anthropic report. Do not treat this file as your live list.
+#
+# Zoom demonstrates a single-product vendor; Anthropic demonstrates one vendor with three
+# distinct services (Claude API, Claude Code, Claude apps) tracked together. To actually
+# track a vendor, ask the skill to onboard it; it will build your real registry from scratch.
 #
 # See references/registry-schema.md for the full field reference.
 
