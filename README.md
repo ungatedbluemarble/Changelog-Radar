@@ -46,7 +46,7 @@ The skill is a single file, `changelog-radar.skill`, in this repository. To inst
 2. In Claude, go to your skills settings and add the skill file. (In claude.ai: Settings, then Capabilities or Skills, depending on your plan. Code execution must be enabled for skills to run.)
 3. That is it. The skill triggers on its own when you ask about tracking or digesting vendor updates.
 
-If you prefer to inspect before installing, the unpacked skill is in the [`changelog-radar/`](changelog-radar/) folder. A `.skill` file is just a zip of that folder. Reading the contents before enabling a skill from anyone, including a colleague, is good practice.
+If you prefer to inspect before installing, the unpacked skill is in the [`Changelog-Radar/`](Changelog-Radar/) folder. A `.skill` file is just a zip of that folder. Reading the contents before enabling a skill from anyone, including a colleague, is good practice.
 
 ---
 
