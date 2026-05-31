@@ -28,13 +28,18 @@ Once the skill is installed in your Claude, you never touch this repository agai
 
 That is the whole loop. You are the expert on what you use; the skill's job is to ask good questions, fetch reliably, and never bury the things you said you care about.
 
-### Recommended: run it as a scheduled task for a morning summary
+### Recommended: have it run on a schedule for a morning summary
 
-The most valuable way to use this skill is to not have to remember it at all. Set it up as a scheduled task in Claude so a filtered summary of changes to the software you are responsible for arrives on its own, for example each morning, rather than waiting for you to think to ask.
+The most valuable way to use this skill is to not have to remember it at all: have a filtered summary of changes to the software you are responsible for arrive on its own each morning, rather than waiting for you to think to ask.
 
 This matters because changelog awareness is a prevention job, and prevention is the thing busy people never get around to. An engineer, a support lead, or an application owner will not check vendor changelogs proactively day to day; they go looking only after something has already broken or a ticket has already landed. A scheduled summary flips that: the relevant change is in front of you before it becomes an incident, with no initiative required on your part.
 
-To set it up, ask Claude to schedule a recurring task that runs your Changelog Radar digest for the vendors you track and delivers the table on your chosen cadence. One honest limitation: a scheduled task runs while your Claude app is open and your machine is awake, so a "9am summary" lands when those conditions are met rather than firing on a fixed clock the way a server cron would. For a daily morning check that is usually fine; for guaranteed unattended delivery you would need a hosted runner, which is outside what this skill does.
+How to set it up, by plan:
+
+- **Any plan, including free:** you can run the digest on demand any time by asking, for example "give me my Changelog Radar updates." This works for everyone. It just requires you to ask.
+- **Paid plans (Pro, Max, Team, Enterprise) with Cowork:** you can have it run automatically. In Claude Cowork, simply ask Claude to run your Changelog Radar digest on a schedule, for example "every weekday at 9am, run my Changelog Radar digest and give me the table." Cowork's scheduled tasks have native access to your installed skills, so it will run this skill on the cadence you describe with nothing extra to build or configure. You describe it once and the summary arrives on schedule.
+
+One honest note on timing: Cowork scheduled tasks run while the Claude desktop app is available, so a "9am" summary lands when that condition is met rather than firing on a fixed server clock. For a daily morning check that is usually fine. Genuinely unattended, machine-off delivery would need a hosted runner, which is outside what this skill does.
 
 ---
 
@@ -46,7 +51,7 @@ The skill is a single file, `changelog-radar.skill`, in this repository. To inst
 2. In Claude, go to your skills settings and add the skill file. (In claude.ai: Settings, then Capabilities or Skills, depending on your plan. Code execution must be enabled for skills to run.)
 3. That is it. The skill triggers on its own when you ask about tracking or digesting vendor updates.
 
-If you prefer to inspect before installing, the unpacked skill is in the [`Changelog-Radar/`](Changelog-Radar/) folder. A `.skill` file is just a zip of that folder. Reading the contents before enabling a skill from anyone, including a colleague, is good practice.
+If you prefer to inspect before installing, the unpacked skill is in the [`changelog-radar/`](changelog-radar/) folder. A `.skill` file is just a zip of that folder. Reading the contents before enabling a skill from anyone, including a colleague, is good practice.
 
 ---
 
@@ -54,7 +59,7 @@ If you prefer to inspect before installing, the unpacked skill is in the [`Chang
 
 The skill keeps two kinds of state, both as plain files you control. Neither is a live database the skill reaches into while running; they exist for portability and inspection.
 
-- **The registry** (`Changelog-Radar/assets/registry.example.yaml` is the seed) records, per vendor, where its updates come from and what its product areas are. It is shared and reusable. It ships with one real worked entry, Zoom, which demonstrates the hardest case: a vendor with no usable feed, reached by search and scrape instead.
+- **The registry** (`changelog-radar/assets/registry.example.yaml` is the seed) records, per vendor, where its updates come from and what its product areas are. It is shared and reusable. It ships with one real worked entry, Zoom, which demonstrates the hardest case: a vendor with no usable feed, reached by search and scrape instead.
 - **Your profile** records which services you track and anything you have chosen to mute. It is normally drawn out of you in conversation each time, because you are the source of truth about your own needs. You can keep it as a file for convenience, but the skill never depends on a stored copy.
 
 When the skill adds a vendor or records a mute, it hands you the updated file. Committing it back is your one manual step. This is deliberate: the skill cannot and does not push to your repository, which keeps your registry version-controlled and inspectable rather than silently mutated.
@@ -93,4 +98,4 @@ If you validate a feed or source for a vendor not yet in the seed registry, a re
 
 ## What this is not
 
-It is not a hosted service, a background daemon, or an MCP server. It is a skill: instructions Claude follows, using tools it already has. It does not run unattended on its own; if you want scheduled delivery, pair it with a Claude scheduled task. It does not share your filtered results publicly; the skill is the shareable thing, your digests are yours.
+It is not a hosted service, a background daemon, or an MCP server. It is a skill: instructions Claude follows, using tools it already has. Anyone on any plan can run it on demand by asking. On paid plans with Cowork, you can ask Cowork to run it on a schedule, which it handles natively because scheduled tasks have access to your installed skills. It does not share your filtered results publicly; the skill is the shareable thing, your digests are yours.
