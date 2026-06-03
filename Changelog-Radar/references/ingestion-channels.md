@@ -22,7 +22,7 @@ The cleanest channel. A feed gives structured, dated, parseable entries that map
 
 ## 2. Email notice
 
-Used when the person prefers updates in their inbox, or already receives them there. The connected inbox becomes both the source and, for scheduled runs, the unattended trigger: the vendor's own notification is the push, so the person never waits on it.
+Used when the person prefers updates in their inbox, or already receives them there. The connected inbox is the source the digest reads at run time: when a digest runs, the skill reads the vendor's notices from the connected Gmail and extracts the relevant identifiers.
 
 **How it works:** The vendor must offer a subscription. The person subscribes. Notices land in the connected Gmail. The skill needs three things recorded: the sender identity to match on, a subject or body pattern that identifies a release notice (versus billing, marketing, support), and the rule for extracting the version or article identifier from the message.
 

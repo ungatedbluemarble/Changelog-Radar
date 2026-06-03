@@ -4,22 +4,23 @@ Two modes. The default for every digest is the table (Mode A). Choose the engine
 
 Both obey the writing rules in the SKILL body: no em dashes, no emojis, sentence case, summarize rather than quote.
 
-## Mode A: the table (default)
+## Mode A: the three tables (default)
 
-After filtering, the entire output is a single table. Nothing else: no preamble, no buckets, no severity tiers, no prose summary before or after, no list of suppressed items. Just the table. The person wants to scan it, not read around it.
+After filtering and routing, the output is three tables in fixed order, and nothing else: no preamble, no prose summary before or after, no list of suppressed items. The three tables, top to bottom by urgency:
 
-Two columns:
+1. **Security** — items the vendor labels security or publishes to its advisory surface.
+2. **Standard** — the normal update feed, governed by the lookback window and watermark.
+3. **Long-duration** — future-dated actionable deadlines (deprecations, end-of-life, forced migrations) drawn from the vendor's standing deprecation surface.
+
+Each table has two columns:
 - **Column one**: provider and service, e.g. "Twilio SMS" or "Twilio, SMS".
-- **Column two**: the update, two to three sentences maximum, only the detail critical to acting on it. Lead with the consequence (deprecation, deadline, breaking change, new capability), not the marketing framing.
+- **Column two**: the item, two to three sentences maximum, only the detail critical to acting on it. Lead with the consequence (the advisory, the deadline and its date, the breaking change, the new capability), not the marketing framing.
 
-One row per update. Structure the rows like this:
-- Each relevant update is its own row. A service with several relevant updates this cycle gets several consecutive rows, repeating the provider and service in column one for each, one update per row.
-- When a service's updates are exhausted, move to that provider's next service, then to the next provider.
-- A monitored service with nothing relevant this cycle gets exactly one row, with column two reading "no updates available".
+One row per item. A service with several items in a given table gets several consecutive rows, repeating the provider and service in column one for each. Show every table's header even when it has no items, so the person can see the skill checked each surface and found nothing rather than wondering whether it looked. For the standard table, a monitored service with nothing relevant this cycle gets one row reading "no updates available". For the security and long-duration tables, an empty table reads "none current".
 
-So a table monitoring Twilio SMS (three updates), Twilio Phone (one update), and Twilio Video (none) is five rows: three SMS rows, one Phone row, one Video row reading "no updates available". The table's length is the total number of filtered updates plus one row for each service that had none. Repeat "Twilio SMS" in column one for each of the three SMS rows rather than merging cells.
+Every item has already passed the only legitimate filter: is it about a service the person monitors. Within an in-scope service, include every item the surfaces produced, one row each. Do not rank, prioritize, or drop items based on a judgment of how important or minor they are. That judgment belongs to the person reading the tables, not to the skill, and silently dropping "minor" items is a bias toward a shorter output, not a service to the user. The two-to-three-sentence limit governs the density of each row, never whether a row appears; if a critical detail needs more room, link to the source inside the cell rather than expanding the prose or omitting the row.
 
-Every update in the table has already passed the only legitimate filter: is it about a service the person monitors. Within an in-scope service, include every update the cycle surfaced, one row each. Do not rank, prioritize, or drop updates based on a judgment of how important or minor they are. That judgment belongs to the person reading the table, not to the skill, and silently dropping "minor" updates is a bias toward a shorter output, not a service to the user. If a monitored service has nine updates this cycle, the table has nine rows for it. The two-to-three-sentence limit governs the density of each row, never whether a row appears. Summarize each update accurately in column two without soft-pedaling or inflating it; if a critical detail needs more room, link to the source inside the cell rather than expanding the prose or omitting the row.
+After the last (long-duration) table, print the disclaimer line exactly and on its own, before anything else: "Not liable for inaccurate vendor data or missed items; verify critical items at the vendor source. @ungatedbluemarble."
 
 ## Mode B: engineering publication (HTML artifact)
 
@@ -48,7 +49,7 @@ Self-contained HTML, IBM Plex fonts, sentence case throughout, inline `<code>` f
 - Lead paragraph: one to two sentences naming how many items are covered and the highest-severity finding.
 - Table of contents: severity badges plus section links.
 - Sections: one per item, with severity badge, h2 title, callout, prose paragraphs, reference links.
-- Footer: source attribution.
+- Footer: source attribution, plus the disclaimer line exactly as in Mode A: "Not liable for inaccurate vendor data or missed items; verify critical items at the vendor source. @ungatedbluemarble." The disclaimer appears on every digest without exception, including this engineering publication format.
 
 Title guidance: concise and descriptive of the specific changes, e.g. "Developer platform changelog: Phone API, Meeting SDK, and webhooks." Lead paragraph in prose, no em dashes.
 

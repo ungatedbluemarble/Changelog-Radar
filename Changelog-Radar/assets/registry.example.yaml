@@ -38,6 +38,16 @@ vendors:
       - Admin
       - Meeting SDK
       - Platform / OAuth
+    security_surface:
+      url: "https://www.zoom.com/en/trust/security-bulletin/"
+      present: true
+    deprecation_surface:
+      # Zoom announces API deprecations within the developer changelog rather than a
+      # single standing EOL page; recorded as not-standing so the long-duration table
+      # is treated best-effort for Zoom.
+      url: null
+      present: false
+    lookback_window: 30d
     notes: >
       Official support KB (KB0061222) and the developer changelog index are
       JavaScript-rendered and return blank on direct fetch; use releasebot.io or
@@ -67,6 +77,14 @@ vendors:
       - Claude API / developer platform
       - Claude Code
       - Claude apps (claude.ai)
+    security_surface:
+      # No separate first-party security advisory feed confirmed at onboarding; security
+      # notices appear within the dated changelog pages above. Recorded best-effort.
+      url: null
+      present: false
+    deprecation_surface:
+      url: "https://platform.claude.com/docs/en/about-claude/model-deprecations"
+      present: true
     lookback_window: 30d
     notes: >
       No confirmed first-party RSS feed surfaced at onboarding, so this is recorded as
