@@ -10,7 +10,7 @@ Most changelog tools dump an entire vendor feed at the reader, or match crude ke
 
 Every digest renders as an inline chat widget by default. The widget shows three sections in fixed order: security items (shown until resolved at source), standard updates (governed by your lookback window), and long-duration deadlines (deprecations and end-of-life dates, shown until the date passes). Each row shows the vendor and service on the left and the actionable detail on the right, with a direct link to the source.
 
-![Changelog Radar digest widget](assets/digest-preview.png)
+![Changelog Radar digest widget](Changelog-Radar/assets/digest-preview.png)
 
 ## Output modes
 
