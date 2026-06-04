@@ -1,10 +1,10 @@
 # Output formats
 
-Two modes. The default for every digest is the table (Mode A). Choose the engineering publication (Mode B) only when the person explicitly asks to publish, share with engineering, format for the team, or produce a changelog diff.
+Three modes. The default for every digest is the inline chat widget (Mode C). Use the plain text tables (Mode A) only when the person explicitly asks for text or plain output. Choose the engineering publication (Mode B) only when the person explicitly asks to publish, share with engineering, format for the team, or produce a changelog diff.
 
-Both obey the writing rules in the SKILL body: no em dashes, no emojis, sentence case, summarize rather than quote.
+All three modes obey the writing rules in the SKILL body: no em dashes, no emojis, sentence case, summarize rather than quote.
 
-## Mode A: the three tables (default)
+## Mode A: the three tables (plain text, on request)
 
 After filtering and routing, the output is three tables in fixed order, and nothing else: no preamble, no prose summary before or after, no list of suppressed items. The three tables, top to bottom by urgency:
 
@@ -56,3 +56,31 @@ Title guidance: concise and descriptive of the specific changes, e.g. "Developer
 Include only items relevant to the person's stack. Omit pure product-release items (anything with no direct API or SDK impact) from the engineering artifact.
 
 A neutral starting stylesheet lives in `assets/engineering-template.html`. Adapt its header labels and accent variables to the vendor and the person's own branding if they have one.
+
+## Mode C: inline chat widget (default)
+
+Render the digest as an inline widget using the visualizer tool. This is the default for every digest unless the person asks for plain text or engineering publication.
+
+### Layout
+
+Three sections in fixed order, matching the three-table structure of Mode A. Use the visualizer's CSS variables throughout so the widget adapts to light and dark mode automatically.
+
+Header: publication name ("Changelog Radar — [vendor] digest"), vendor and scope line on the left, date on the right. Separated from sections by a bottom border.
+
+Section headers: icon plus label plus a muted subtitle in smaller text. Security uses the danger color and a shield icon. Standard updates uses the primary text color and a list icon. Long-duration deadlines uses the warning color and a calendar-clock icon.
+
+Rows: two-column grid, 150px left column and a fluid right column. Left column shows provider name in normal weight and service in muted secondary text. Right column shows the item detail in 14px body text at 1.6 line height, with inline source links. Rows are separated by a 0.5px tertiary border.
+
+Empty states: follow the same rules as Mode A. Standard table shows "no updates available" for a monitored service with nothing this cycle. Security and long-duration tables show "none current" when empty, so the person can see the skill checked and found nothing.
+
+Completeness notes: when a surface is best-effort (no dedicated feed, inline-only items), add a 12px muted note below that section. Do not suppress the section.
+
+Footer: 0.5px top border, 12px muted text, disclaimer line exactly: "Not liable for inaccurate vendor data or missed items; verify critical items at the vendor source. @ungatedbluemarble."
+
+### Content rules
+
+Mode C applies the same content rules as Mode A: include every in-scope item regardless of API impact, do not filter to engineering-relevant items only, do not rank or drop items on importance. The widget is the default digest surface for all readers, not an engineering-only view.
+
+### Scope note
+
+Mode C does not filter out pure product-release items the way Mode B does. All items that pass the in-scope filter appear in the widget. If the person later asks for an engineering publication of the same digest, apply the Mode B API-impact filter at that point.
