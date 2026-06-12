@@ -48,4 +48,4 @@ changelog-radar/
 
 ## License
 
-MIT. Published by [@ungatedbluemarble](https://github.com/ungatedbluemarble).
+Licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) (Attribution-NonCommercial-NoDerivatives). You may share this work for noncommercial purposes with attribution. You may not use it commercially or distribute derivative versions. All rights not expressly granted are reserved; see the LICENSE and NOTICE files. For a commercial license, contact [@ungatedbluemarble](https://github.com/ungatedbluemarble).
